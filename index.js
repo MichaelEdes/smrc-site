@@ -6,6 +6,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const path = require("path");
+const port = process.env.PORT || 8800;
+
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
+
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -92,6 +101,6 @@ app.post("/orders", (req, res) => {
   });
 });
 
-app.listen(8800, () => {
-  console.log("connected to backend!");
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
