@@ -1,0 +1,130 @@
+.shopping-cart-container {
+  display: flex;
+  position: fixed;
+  height: 100vh;
+  background-color: white;
+  width: 100%;
+  padding: 2vh 1vw;
+  z-index: 10;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  box-sizing: border-box;
+  left: 100vw;
+  transition: 0.5s;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+
+.active {
+  left: 0;
+  transition: 0.5s;
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.cart-header h1 {
+  padding: unset;
+  margin: unset;
+}
+
+.cart-header p {
+  color: rgb(110, 110, 110);
+}
+
+.close-icon {
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.cart-breakline {
+  width: 100%;
+  border: 0;
+  background-color: rgb(234, 238, 238);
+  height: 1px;
+}
+
+.cart-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: white;
+}
+
+.cart-total {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2vh 0;
+}
+
+.back-to-shopping-btn {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 4vh 0;
+}
+
+.back-to-shopping-btn button {
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 30px;
+  color: white;
+  border: none;
+  padding: 10px 15px 10px 10px;
+  cursor: pointer;
+}
+
+.cart-content {
+  height: 70vh;
+  border-radius: 30px;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  overflow: scroll;
+}
+
+.cart-checkout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-checkout input {
+  width: 50%;
+  border: solid 1px rgb(172, 171, 171);
+  padding: 8px;
+  border-radius: 30px;
+}
+
+.cart-checkout button {
+  background-color: blue;
+  padding: 10px;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 760px) {
+  .shopping-cart-container {
+    width: 35vw;
+  }
+
+  .active {
+    left: 65vw;
+  }
+}

@@ -1,0 +1,91 @@
+.header-container {
+  width: 100vw;
+  height: 10vh;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header a {
+  text-decoration: none;
+  color: black;
+}
+
+.header .logo {
+  font-weight: 600;
+  font-size: x-large;
+}
+
+.logo span {
+  color: blue;
+}
+
+.page-link {
+  font-weight: 300;
+  font-size: smaller;
+}
+
+.page-link a {
+  text-decoration: none;
+  color: black;
+}
+
+.page-link a:hover {
+  color: blue;
+}
+
+.cart-icon-container {
+  position: relative;
+}
+
+.cart-icon {
+  display: block;
+  height: 40px;
+  width: 40px;
+  background-color: rgb(234, 238, 238);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: transform 0.5s;
+  cursor: pointer;
+  position: fixed;
+  right: 30px;
+  top: 30px;
+  z-index: 9;
+}
+
+.cart-icon:hover,
+.cart-icon:focus {
+  transform: scale(1.2);
+  transition: transform 0.5s;
+}
+
+@media screen and (min-width: 480px) {
+  .header-container {
+    padding: 30px;
+  }
+}
+
+.cart-item-count {
+  position: absolute;
+  background-color: blue;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  right: -5px;
+  top: -8px;
+}

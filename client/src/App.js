@@ -1,0 +1,61 @@
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage/HomePage";
+import ProductPage from "./pages/ProductPage/ProductPage";
+import Header from "./components/Header/Header";
+import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
+
+function App() {
+  const [isActive, setIsActive] = useState(false);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const toggleCart = () => {
+    setIsActive(!isActive);
+  };
+
+  const addItemToCart = (item) => {
+    setCart([...cart, item]);
+  };
+
+  const removeItemFromCart = (index) => {
+    setCart(cart.filter((_, i) => i !== index));
+  };
+
+  const emptyCart = () => {
+    setCart([]);
+  };
+
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <ShoppingCart
+          isActive={isActive}
+          cart={cart}
+          toggleCart={toggleCart}
+          removeItemFromCart={removeItemFromCart}
+          emptyCart={emptyCart}
+        />
+        <Header toggleCart={toggleCart} cart={cart} />
+        <Routes>
+          <Route
+            path="/"
+            element={<HomePage addItemToCart={addItemToCart} />}
+          />
+          <Route
+            path="/ProductPage"
+            element={<ProductPage addItemToCart={addItemToCart} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;

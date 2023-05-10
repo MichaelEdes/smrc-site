@@ -1,0 +1,139 @@
+.repair-centre-container {
+  display: block;
+  height: fit-content;
+  width: 100%;
+  background-color: blue;
+  padding: 5vw;
+  width: 100vw;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+#repair-centre-title {
+  margin: unset;
+  padding: 4vw 5vw 8vw 5vw;
+  color: rgb(255, 255, 255);
+}
+
+#form-title {
+  padding: unset;
+  margin: 0 0 -10px 0;
+  font-size: 1.5rem;
+}
+
+.repair-centre {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.repair-centre-form-container {
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  border-radius: 30px;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.repair-centre-image {
+  height: auto;
+  overflow: visible;
+  width: 100%;
+  min-height: 80vw;
+}
+
+.repair-centre-image img {
+  position: absolute;
+  left: 20%;
+  bottom: 0;
+  max-width: 60%;
+}
+
+@media screen and (min-width: 760px) {
+  .repair-centre {
+    flex-direction: row-reverse;
+    height: 80vh;
+  }
+  #repair-centre-title {
+    padding: 0;
+  }
+
+  .repair-centre-image img {
+    max-width: 40%;
+    bottom: 0;
+    left: 5%;
+    max-height: 70%;
+    overflow: hidden;
+  }
+}
+
+.repair-centre-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0rem 1rem;
+  box-sizing: border-box;
+  height: fit-content;
+}
+
+.repair-centre-form h1 {
+  text-align: center;
+  font-weight: 300;
+  font-size: 0.8rem;
+  margin: 10px 0;
+}
+
+.repair-centre-form input,
+.form-notes {
+  border: solid 1px grey;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 0.5rem;
+}
+
+.form-user-name {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  flex-direction: row;
+  background-color: aqua;
+}
+
+.form-user-details {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.form-device-selection,
+.form-problem-selection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 0.6rem;
+  align-items: center;
+}
+
+.form-device-selection label,
+.form-problem-selection label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.repair-centre-form button {
+  border: none;
+  background-color: blue;
+  padding: 10px;
+  border-radius: 20px;
+  color: white;
+  font-size: larger;
+}

@@ -1,0 +1,58 @@
+.shopping-cart-item-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  height: 150px;
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+
+.shopping-cart-item-container h1 {
+  font-size: 1rem;
+  margin: unset;
+}
+
+.shopping-cart-item-container p {
+  font-size: 0.7rem;
+  color: rgb(52, 52, 52);
+  font-weight: 200;
+}
+
+.shopping-cart-item-container img {
+  height: 130px;
+  width: 150px;
+  border-radius: 20px;
+}
+
+.shopping-cart-item-container sub {
+  font-size: 0.7rem;
+  color: rgb(101, 101, 101);
+}
+
+.cart-item-content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.cart-item-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: blue;
+}
+
+.cart-item-remove-btn {
+  display: flex;
+  height: 100%;
+  padding: 10px;
+  align-items: center;
+}
+
+.cart-item-remove-btn div {
+  cursor: pointer;
+}
