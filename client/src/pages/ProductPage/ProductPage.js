@@ -31,7 +31,7 @@ function ProductPage({ addItemToCart }) {
     }
   };
 
-  const displayedProducts = products.filter(
+  const displayedProducts = products?.filter(
     (product) =>
       (selectedFilters.length === 0 ||
         selectedFilters.includes(product.type)) &&
