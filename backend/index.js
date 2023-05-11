@@ -17,7 +17,7 @@ if (process.env.JAWSDB_URL) {
   db = mysql.createConnection({
     host: dbUrl.hostname,
     user: auth[0],
-    password: "",
+    password: auth[1],
     database: dbUrl.pathname.substr(1),
   });
 } else {
