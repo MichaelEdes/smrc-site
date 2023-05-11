@@ -167,6 +167,7 @@ app.post("/orders", (req, res) => {
 app.post("/users/login", (req, res) => {
   const { username, password } = req.body;
   const q = "SELECT * FROM users WHERE username = ?;";
+  console.log("Request received:", username, password);
   db.query(q, [username], (err, results) => {
     if (err) return res.status(500).json(err);
 

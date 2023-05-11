@@ -21,7 +21,6 @@ function AdminLoginPage() {
       })
       .catch((error) => {
         console.error("Error:", error);
-        console.log(username, password);
       });
   };
 
