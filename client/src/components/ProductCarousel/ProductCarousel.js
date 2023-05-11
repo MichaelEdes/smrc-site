@@ -24,7 +24,7 @@ const ProductCarousel = ({ addItemToCart }) => {
         <h1 id="product-carousel-title">Popular Items</h1>
         <div className="product-carousel-container">
           <div className="product-carousel">
-            {products.slice(0, 7).map((product, index) => (
+            {products?.slice(0, 7).map((product, index) => (
               <ProductCard
                 key={product.id}
                 id={product.id}

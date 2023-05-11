@@ -63,7 +63,7 @@ function ProductPage({ addItemToCart }) {
       </div>
       <div className="products-page-content">
         <div className="products-page-items-container">
-          {displayedProducts.map((product) => (
+          {displayedProducts?.map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}
