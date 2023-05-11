@@ -120,7 +120,10 @@ function AdminTable({ data }) {
                 {new Date(row.date).toLocaleDateString()}
               </StyledTableCell>
               <StyledTableCell align="right">
-                <button onClick={() => handleDelete(row.id)}>
+                <button
+                  className="confirm-btn"
+                  onClick={() => handleDelete(row.id)}
+                >
                   {confirm < 1 ? "Completed" : "Confirm"}
                 </button>
               </StyledTableCell>
