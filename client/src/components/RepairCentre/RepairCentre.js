@@ -28,7 +28,7 @@ const RepairCentre = () => {
     console.log(report);
 
     try {
-      await axios.post("http://localhost:8800/device_repair", report);
+      await axios.post("https://smrc.herokuapp.com/device_repair", report);
       alert("Thank you for your report, we will be in touch shortly! 😁");
       setFirstName("");
       setSurName("");
@@ -206,7 +206,9 @@ const RepairCentre = () => {
               onChange={(e) => setOtherNotes(e.target.value)}
             />
             <br />
-            <button id="form-submit-btn" type="submit">Submit</button>
+            <button id="form-submit-btn" type="submit">
+              Submit
+            </button>
           </form>
         </div>
         <div className="repair-centre-image">
