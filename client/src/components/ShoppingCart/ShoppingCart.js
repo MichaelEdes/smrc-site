@@ -38,6 +38,7 @@ function ShoppingCart({
           id: item.id,
           name: item.name,
           quantity: 1,
+          price: item.price,
         })),
       };
 

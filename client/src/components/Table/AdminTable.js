@@ -41,7 +41,7 @@ function AdminTable({ data }) {
 
     const fetchAllOrderItems = async () => {
       try {
-        const res = await axios.get("https://smrc.herokuapp.com/orders");
+        const res = await axios.get("https://smrc.herokuapp.com/order_items");
         setOrderItems(res.data);
       } catch (err) {
         console.log(err);
@@ -92,11 +92,11 @@ function AdminTable({ data }) {
                   </TableHead>
                   <TableBody>
                     {orderItems
-                      .filter((item) => item.id === row.order_id)
+                      .filter((item) => item.order_id === row.id)
                       .map((item) => (
                         <TableRow key={item.id}>
-                          <TableCell>{}</TableCell>
-                          <TableCell>{item.quantity}</TableCell>
+                          <TableCell>{item.product_id}</TableCell>
+                          <TableCell>{item.product_name}</TableCell>
                           <TableCell>{item.price}</TableCell>
                         </TableRow>
                       ))}
