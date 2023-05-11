@@ -39,6 +39,8 @@ function ShoppingCart({
           name: item.name,
           quantity: 1,
           price: item.price,
+          color: item.color,
+          memory: item.memory,
         })),
       };
 

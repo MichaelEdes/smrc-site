@@ -112,13 +112,15 @@ app.post("/orders", (req, res) => {
 
     // Insert order items into the order_items table
     const orderItemsQuery =
-      "INSERT INTO order_items (order_id, product_id, product_name, quantity, price) VALUES ?";
+      "INSERT INTO order_items (order_id, product_id, product_name, quantity, price, color, memory) VALUES ?";
     const orderItemsValues = items.map((item) => [
       orderID,
       item.id,
       item.name,
       item.quantity,
       item.price,
+      item.color,
+      item.memory,
     ]);
 
     db.query(orderItemsQuery, [orderItemsValues], (err, data) => {

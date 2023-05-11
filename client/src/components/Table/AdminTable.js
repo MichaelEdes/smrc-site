@@ -72,7 +72,7 @@ function AdminTable({ data }) {
           </TableCell>
           <TableCell align="right">{row.user_name}</TableCell>
           <TableCell align="right">{row.order_date}</TableCell>
-          <TableCell align="right">{row.total}</TableCell>
+          <TableCell align="right">£{row.total}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -84,9 +84,11 @@ function AdminTable({ data }) {
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
-                      <TableCell>ID</TableCell>
-                      <TableCell>Name</TableCell>
-                      <TableCell align="right">Date</TableCell>
+                      <TableCell align="right">ID</TableCell>
+                      <TableCell align="right">Name</TableCell>
+                      <TableCell align="right">Colour</TableCell>
+                      <TableCell align="right">memory</TableCell>
+                      <TableCell align="right">Quantity</TableCell>
                       <TableCell align="right">Total</TableCell>
                     </TableRow>
                   </TableHead>
@@ -95,9 +97,14 @@ function AdminTable({ data }) {
                       .filter((item) => item.order_id === row.id)
                       .map((item) => (
                         <TableRow key={item.id}>
-                          <TableCell>{item.product_id}</TableCell>
-                          <TableCell>{item.product_name}</TableCell>
-                          <TableCell>{item.price}</TableCell>
+                          <TableCell align="right">{item.product_id}</TableCell>
+                          <TableCell align="right">
+                            {item.product_name}
+                          </TableCell>
+                          <TableCell align="right">{item.color}</TableCell>
+                          <TableCell align="right">{item.memory}GB</TableCell>
+                          <TableCell align="right">{item.quantity}</TableCell>
+                          <TableCell align="right">£{item.price}</TableCell>
                         </TableRow>
                       ))}
                   </TableBody>
