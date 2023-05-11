@@ -164,7 +164,7 @@ app.post("/orders", (req, res) => {
   });
 });
 
-app.post("/users/login", (req, res) => {
+app.post("/users", (req, res) => {
   const { username, password } = req.body;
   const q = "SELECT * FROM users WHERE username = ?;";
   db.query(q, [username], (err, results) => {

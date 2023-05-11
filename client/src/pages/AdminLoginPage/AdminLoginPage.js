@@ -15,7 +15,7 @@ function AdminLoginPage() {
     };
 
     axios
-      .post("https://smrc.herokuapp.com/users/login", user)
+      .post("https://smrc.herokuapp.com/users", user)
       .then((response) => {
         console.log(response.data);
       })
