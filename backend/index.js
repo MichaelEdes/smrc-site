@@ -48,6 +48,22 @@ app.get("/device_repair", (req, res) => {
   });
 });
 
+app.get("/orders", (req, res) => {
+  const q = "SELECT * FROM ORDERS;";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
+app.get("/order_item", (req, res) => {
+  const q = "SELECT * FROM ORDER_ITEM;";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
 app.post("/device_repair", (req, res) => {
   const {
     first_name,
