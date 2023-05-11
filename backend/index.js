@@ -77,7 +77,7 @@ app.post("/device_repair", (req, res) => {
   } = req.body;
 
   const q =
-    "INSERT INTO DEVICE_REPAIR (first_name, surname, email, device_type, device_make, device_model, problem, other_notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO DEVICE_REPAIR (first_name, surname, email, date, device_type, device_make, device_model, problem, other_notes) VALUES (?, ?, ?, NOW(), ?, ?, ?, ?, ?)";
 
   db.query(
     q,

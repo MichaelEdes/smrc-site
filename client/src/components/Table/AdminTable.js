@@ -70,46 +70,93 @@ function AdminTable({ data }) {
           <TableCell component="th" scope="row">
             {row.id}
           </TableCell>
-          <TableCell align="right">{row.user_name}</TableCell>
-          <TableCell align="right">{row.order_date}</TableCell>
-          <TableCell align="right">£{row.total}</TableCell>
+          {data === "orders" && (
+            <>
+              <TableCell align="right">{row.user_name}</TableCell>
+              <TableCell align="right">{row.order_date}</TableCell>
+              <TableCell align="right">£{row.total}</TableCell>
+            </>
+          )}
+          {data === "repairs" && (
+            <>
+              <TableCell align="right">
+                {row.first_name} {row.surname}
+              </TableCell>
+              <TableCell align="right">{row.email}</TableCell>
+            </>
+          )}
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ margin: 1 }}>
-                <Typography variant="h6" gutterBottom component="div">
-                  Order Details
-                </Typography>
-                <Table size="small" aria-label="purchases">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align="right">ID</TableCell>
-                      <TableCell align="right">Name</TableCell>
-                      <TableCell align="right">Colour</TableCell>
-                      <TableCell align="right">memory</TableCell>
-                      <TableCell align="right">Quantity</TableCell>
-                      <TableCell align="right">Total</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {orderItems
-                      .filter((item) => item.order_id === row.id)
-                      .map((item) => (
-                        <TableRow key={item.id}>
-                          <TableCell align="right">{item.product_id}</TableCell>
-                          <TableCell align="right">
-                            {item.product_name}
-                          </TableCell>
-                          <TableCell align="right">{item.color}</TableCell>
-                          <TableCell align="right">{item.memory}GB</TableCell>
-                          <TableCell align="right">{item.quantity}</TableCell>
-                          <TableCell align="right">£{item.price}</TableCell>
-                        </TableRow>
-                      ))}
-                  </TableBody>
-                </Table>
-              </Box>
+              {data === "orders" && (
+                <Box sx={{ margin: 1 }}>
+                  <Typography variant="h6" gutterBottom component="div">
+                    Order Details
+                  </Typography>
+                  <Table size="small" aria-label="purchases">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="right">ID</TableCell>
+                        <TableCell align="right">Name</TableCell>
+                        <TableCell align="right">Colour</TableCell>
+                        <TableCell align="right">memory</TableCell>
+                        <TableCell align="right">Quantity</TableCell>
+                        <TableCell align="right">Total</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {orderItems
+                        .filter((item) => item.order_id === row.id)
+                        .map((item) => (
+                          <TableRow key={item.id}>
+                            <TableCell align="right">
+                              {item.product_id}
+                            </TableCell>
+                            <TableCell align="right">
+                              {item.product_name}
+                            </TableCell>
+                            <TableCell align="right">{item.color}</TableCell>
+                            <TableCell align="right">{item.memory}GB</TableCell>
+                            <TableCell align="right">{item.quantity}</TableCell>
+                            <TableCell align="right">£{item.price}</TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </Box>
+              )}
+              {data === "repairs" && (
+                <Box sx={{ margin: 1 }}>
+                  <Typography variant="h6" gutterBottom component="div">
+                    Repair Details
+                  </Typography>
+                  <Table size="medium" aria-label="purchases">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell />
+                        <TableCell align="left">Device Type</TableCell>
+                        <TableCell align="left">Device Make</TableCell>
+                        <TableCell align="left">Device Model</TableCell>
+                        <TableCell align="left">Problem</TableCell>
+                        <TableCell align="right">Notes</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell />
+                        <TableCell align="left">{row.device_type}</TableCell>
+                        <TableCell align="left">{row.device_make}</TableCell>
+                        <TableCell align="left">{row.device_model}</TableCell>
+                        <TableCell align="left">{row.problem}</TableCell>
+                        <TableCell align="right">
+                          {row.other_notes ? row.other_notes : "No Notes"}
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </Box>
+              )}
             </Collapse>
           </TableCell>
         </TableRow>
@@ -138,19 +185,25 @@ function AdminTable({ data }) {
                 <>
                   <TableCell align="right">Name</TableCell>
                   <TableCell align="right">Email</TableCell>
-                  <TableCell align="right">Device Type</TableCell>
-                  <TableCell align="right">Device Make</TableCell>
-                  <TableCell align="right">Device Model</TableCell>
-                  <TableCell align="right">Problem</TableCell>
-                  <TableCell align="right">Notes</TableCell>
                 </>
               )}
             </TableRow>
           </TableHead>
           <TableBody>
-            {orders.map((order, index) => (
-              <Row key={index} row={order} />
-            ))}
+            {data === "orders" && (
+              <>
+                {orders.map((order, index) => (
+                  <Row key={index} row={order} />
+                ))}
+              </>
+            )}
+            {data === "repairs" && (
+              <>
+                {repairs.map((repair, index) => (
+                  <Row key={index} row={repair} />
+                ))}
+              </>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

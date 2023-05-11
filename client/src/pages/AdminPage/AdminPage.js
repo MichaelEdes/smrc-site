@@ -5,8 +5,8 @@ import AdminTable from "../../components/Table/AdminTable";
 function AdminPage() {
   return (
     <div>
-      <AdminTable data={"orders"} />
-      {/* <AdminTable data={"repairs"} /> */}
+      {/* <AdminTable data={"orders"} /> */}
+      <AdminTable data={"repairs"} />
     </div>
   );
 }
