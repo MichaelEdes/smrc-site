@@ -2,6 +2,7 @@ import express from "express";
 import mysql from "mysql";
 import cors from "cors";
 import url from "url";
+import bcrypt from "bcrypt";
 
 const app = express();
 app.use(cors());
@@ -162,8 +163,6 @@ app.post("/orders", (req, res) => {
     });
   });
 });
-
-const bcrypt = require("bcrypt");
 
 app.post("/users/login", (req, res) => {
   const { username, password } = req.body;
