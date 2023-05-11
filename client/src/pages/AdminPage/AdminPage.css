@@ -1,5 +1,17 @@
-.table {
-  display: flex;
-  flex-direction: column;
-  text-align: start;
+.admin-container {
+  padding: 0 10vw 10vh 10vw;
+}
+
+.admin-container h1 {
+  font-size: 1.5rem;
+  margin: 5vh 0;
+}
+
+.table-notes {
+  column-span: 100px;
+  width: 30%;
+}
+
+.sub-table {
+  background-color: rgb(233, 233, 233);
 }

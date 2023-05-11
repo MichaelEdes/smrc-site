@@ -48,6 +48,14 @@ app.get("/device_repair", (req, res) => {
   });
 });
 
+app.get("/device_repair/:id", (req, res) => {
+  const q = "SELECT * FROM DEVICE_REPAIR WHERE id = ?;";
+  db.query(q, [req.params.id], (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
 app.get("/orders", (req, res) => {
   const q = "SELECT * FROM ORDERS;";
   db.query(q, (err, data) => {
@@ -97,6 +105,23 @@ app.post("/device_repair", (req, res) => {
     }
   );
 });
+
+app.delete("/device_repair/:id", (req, res) => {
+  const q = "DELETE FROM DEVICE_REPAIR WHERE id = ?";
+
+  db.query(q, [req.params.id], (err, result) => {
+    if (err) {
+      return res.status(500).json(err);
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "No record found with this ID" });
+    }
+
+    return res.json({ message: "Deleted successfully" });
+  });
+});
+``;
 
 app.post("/orders", (req, res) => {
   const { userName, total, items } = req.body;

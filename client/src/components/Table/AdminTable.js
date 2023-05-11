@@ -6,7 +6,8 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import { styled } from "@mui/system";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -14,6 +15,19 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { blue } from "@mui/material/colors";
+
+const StyledTableCell = styled(TableCell)(() => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: "blue",
+    color: "white",
+    fontWeight: "bold",
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+    textTransform: "lowercase",
+  },
+}));
 
 function AdminTable({ data }) {
   const [repairs, setRepairs] = React.useState([]);
@@ -52,11 +66,20 @@ function AdminTable({ data }) {
     fetchAllOrderItems();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`https://smrc.herokuapp.com/device_repair/${id}`);
+      setRepairs(repairs.filter((repair) => repair.id !== id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   function Row({ row }) {
     const [open, setOpen] = React.useState(false);
 
     return (
-      <React.Fragment>
+      <React.Fragment className={"table"}>
         <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
           <TableCell>
             <IconButton
@@ -67,22 +90,27 @@ function AdminTable({ data }) {
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
-          <TableCell component="th" scope="row">
+          <StyledTableCell component="th" scope="row">
             {row.id}
-          </TableCell>
+          </StyledTableCell>
           {data === "orders" && (
             <>
-              <TableCell align="right">{row.user_name}</TableCell>
-              <TableCell align="right">{row.order_date}</TableCell>
-              <TableCell align="right">£{row.total}</TableCell>
+              <StyledTableCell align="right">{row.user_name}</StyledTableCell>
+              <StyledTableCell align="right">
+                {new Date(row.order_date).toLocaleDateString()}
+              </StyledTableCell>
+              <StyledTableCell align="right">£{row.total}</StyledTableCell>
             </>
           )}
           {data === "repairs" && (
             <>
-              <TableCell align="right">
+              <StyledTableCell align="right">
                 {row.first_name} {row.surname}
-              </TableCell>
-              <TableCell align="right">{row.email}</TableCell>
+              </StyledTableCell>
+              <StyledTableCell align="right">{row.email}</StyledTableCell>
+              <StyledTableCell align="right">
+                {new Date(row.date).toLocaleDateString()}
+              </StyledTableCell>
             </>
           )}
         </TableRow>
@@ -90,19 +118,25 @@ function AdminTable({ data }) {
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
               {data === "orders" && (
-                <Box sx={{ margin: 1 }}>
+                <Box sx={{ margin: "3vh 3vw 5vh 3vw" }}>
                   <Typography variant="h6" gutterBottom component="div">
                     Order Details
                   </Typography>
-                  <Table size="small" aria-label="purchases">
-                    <TableHead>
+                  <Table
+                    className="sub-table"
+                    size="small"
+                    aria-label="purchases"
+                  >
+                    <TableHead sx={{ fontWeight: "bold" }}>
                       <TableRow>
-                        <TableCell align="right">ID</TableCell>
-                        <TableCell align="right">Name</TableCell>
-                        <TableCell align="right">Colour</TableCell>
-                        <TableCell align="right">memory</TableCell>
-                        <TableCell align="right">Quantity</TableCell>
-                        <TableCell align="right">Total</TableCell>
+                        <StyledTableCell align="right">ID</StyledTableCell>
+                        <StyledTableCell align="right">Name</StyledTableCell>
+                        <StyledTableCell align="right">Colour</StyledTableCell>
+                        <StyledTableCell align="right">memory</StyledTableCell>
+                        <StyledTableCell align="right">
+                          Quantity
+                        </StyledTableCell>
+                        <StyledTableCell align="right">Total</StyledTableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -110,16 +144,29 @@ function AdminTable({ data }) {
                         .filter((item) => item.order_id === row.id)
                         .map((item) => (
                           <TableRow key={item.id}>
-                            <TableCell align="right">
+                            <StyledTableCell align="right">
                               {item.product_id}
-                            </TableCell>
-                            <TableCell align="right">
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
                               {item.product_name}
-                            </TableCell>
-                            <TableCell align="right">{item.color}</TableCell>
-                            <TableCell align="right">{item.memory}GB</TableCell>
-                            <TableCell align="right">{item.quantity}</TableCell>
-                            <TableCell align="right">£{item.price}</TableCell>
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
+                              {item.color}
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
+                              {item.memory}GB
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
+                              {item.quantity}
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
+                              £{item.price}
+                            </StyledTableCell>
+                            <StyledTableCell align="right">
+                              <button onClick={() => handleDelete(row.id)}>
+                                Delete
+                              </button>
+                            </StyledTableCell>
                           </TableRow>
                         ))}
                     </TableBody>
@@ -127,19 +174,31 @@ function AdminTable({ data }) {
                 </Box>
               )}
               {data === "repairs" && (
-                <Box sx={{ margin: 1 }}>
+                <Box sx={{ margin: "3vh 3vw 5vh 3vw" }}>
                   <Typography variant="h6" gutterBottom component="div">
                     Repair Details
                   </Typography>
-                  <Table size="medium" aria-label="purchases">
-                    <TableHead>
+                  <Table
+                    className="sub-table"
+                    size="small"
+                    aria-label="purchases"
+                  >
+                    <TableHead sx={{ fontWeight: "bold" }}>
                       <TableRow>
-                        <TableCell />
-                        <TableCell align="left">Device Type</TableCell>
-                        <TableCell align="left">Device Make</TableCell>
-                        <TableCell align="left">Device Model</TableCell>
-                        <TableCell align="left">Problem</TableCell>
-                        <TableCell align="right">Notes</TableCell>
+                        <StyledTableCell />
+                        <StyledTableCell align="left">
+                          Device Type
+                        </StyledTableCell>
+                        <StyledTableCell align="left">
+                          Device Make
+                        </StyledTableCell>
+                        <StyledTableCell align="left">
+                          Device Model
+                        </StyledTableCell>
+                        <StyledTableCell align="left">Problem</StyledTableCell>
+                        <StyledTableCell className="table-notes" align="left">
+                          Notes
+                        </StyledTableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -149,7 +208,7 @@ function AdminTable({ data }) {
                         <TableCell align="left">{row.device_make}</TableCell>
                         <TableCell align="left">{row.device_model}</TableCell>
                         <TableCell align="left">{row.problem}</TableCell>
-                        <TableCell align="right">
+                        <TableCell align="left">
                           {row.other_notes ? row.other_notes : "No Notes"}
                         </TableCell>
                       </TableRow>
@@ -168,23 +227,24 @@ function AdminTable({ data }) {
     return (
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table">
-          <TableHead>
+          <TableHead sx={{ fontWeight: "200" }}>
             <TableRow>
-              <TableCell />
-              <TableCell component="th" scope="row">
+              <StyledTableCell />
+              <StyledTableCell component="th" scope="row">
                 ID
-              </TableCell>
+              </StyledTableCell>
               {data === "orders" && (
                 <>
-                  <TableCell align="right">Name</TableCell>
-                  <TableCell align="right">Date</TableCell>
-                  <TableCell align="right">Total</TableCell>
+                  <StyledTableCell align="right">Name</StyledTableCell>
+                  <StyledTableCell align="right">Date</StyledTableCell>
+                  <StyledTableCell align="right">Total</StyledTableCell>
                 </>
               )}
               {data === "repairs" && (
                 <>
-                  <TableCell align="right">Name</TableCell>
-                  <TableCell align="right">Email</TableCell>
+                  <StyledTableCell align="right">Name</StyledTableCell>
+                  <StyledTableCell align="right">Email</StyledTableCell>
+                  <StyledTableCell align="right">Date</StyledTableCell>
                 </>
               )}
             </TableRow>
