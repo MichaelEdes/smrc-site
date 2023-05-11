@@ -9,13 +9,8 @@ function AdminLoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const user = {
-      username: username,
-      password: password,
-    };
-
     axios
-      .post("https://smrc.herokuapp.com/users/login", user)
+      .post("https://smrc.herokuapp.com/users/login", { username, password })
       .then((response) => {
         console.log(response.data);
       })

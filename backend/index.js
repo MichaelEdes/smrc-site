@@ -2,8 +2,8 @@ import express from "express";
 import mysql from "mysql";
 import cors from "cors";
 import url from "url";
-import bcrypt from "bcrypt";
 
+const bcrypt = require("bcrypt");
 const app = express();
 app.use(cors());
 app.use(express.json());
