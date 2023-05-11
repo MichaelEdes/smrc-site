@@ -19,6 +19,11 @@ function Header({ toggleCart, cart }) {
           <a href="/ProductPage">All Products</a>
         </div>
         <div className="cart-icon-container">
+          <div>
+            <button>
+              <a href="/AdminLoginPage">Admin</a>
+            </button>
+          </div>
           <div className="cart-icon" onClick={handleCartClick}>
             {cart.length > 0 && (
               <div className="cart-item-count">{cart.length}</div>
