@@ -43,7 +43,7 @@ function ShoppingCart({
 
       try {
         const response = await axios.post(
-          "http://localhost:8800/orders",
+          "https://smrc.herokuapp.com/orders",
           orderData
         );
         alert(
