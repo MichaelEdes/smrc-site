@@ -73,6 +73,14 @@ app.get("/order_items", (req, res) => {
   });
 });
 
+app.get("/users", (req, res) => {
+  const q = "SELECT * USERS;";
+  db.query(q, (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  });
+});
+
 app.post("/device_repair", (req, res) => {
   const {
     first_name,
@@ -177,21 +185,6 @@ app.post("/users", (req, res) => {
       }
 
       return res.json({ message: "Logged in successfully" });
-    });
-  });
-});
-
-app.post("/register", (req, res) => {
-  const { username, password } = req.body;
-
-  bcrypt.hash(password, 10, (err, hashedPassword) => {
-    if (err) return res.status(500).json(err);
-
-    const q = "INSERT INTO users (username, password) VALUES (?, ?);";
-    db.query(q, [username, hashedPassword], (err, results) => {
-      if (err) return res.status(500).json(err);
-
-      return res.json({ message: "User registered successfully" });
     });
   });
 });
