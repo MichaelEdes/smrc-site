@@ -8,8 +8,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-let db;
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
+let db;
 if (process.env.JAWSDB_URL) {
   // Heroku deployment
   const dbUrl = url.parse(process.env.JAWSDB_URL);
