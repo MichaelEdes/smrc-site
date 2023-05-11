@@ -4,21 +4,13 @@ import cors from "cors";
 import url from "url";
 
 const bcrypt = require("bcrypt");
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
 let db;
+
 if (process.env.JAWSDB_URL) {
   // Heroku deployment
   const dbUrl = url.parse(process.env.JAWSDB_URL);
@@ -175,8 +167,8 @@ app.post("/orders", (req, res) => {
 
 app.post("/users/login", (req, res) => {
   const { username, password } = req.body;
-  const q = "SELECT * FROM users WHERE username = ?;";
-  console.log("Request received:", username, password);
+  const q = "SELECT * FROM users WHERE username = ?";
+
   db.query(q, [username], (err, results) => {
     if (err) return res.status(500).json(err);
 
@@ -190,7 +182,6 @@ app.post("/users/login", (req, res) => {
       if (err) return res.status(500).json(err);
 
       if (!result) {
-        console.log("helluser", user, password, user.password);
         return res.status(401).json({ message: "Incorrect password" });
       }
 
