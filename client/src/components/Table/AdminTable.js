@@ -15,7 +15,6 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { blue } from "@mui/material/colors";
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -79,7 +78,7 @@ function AdminTable({ data }) {
     const [open, setOpen] = React.useState(false);
 
     return (
-      <React.Fragment className={"table"}>
+      <React.Fragment>
         <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
           <TableCell>
             <IconButton
@@ -111,6 +110,9 @@ function AdminTable({ data }) {
               <StyledTableCell align="right">
                 {new Date(row.date).toLocaleDateString()}
               </StyledTableCell>
+              <StyledTableCell align="right">
+                <button onClick={() => handleDelete(row.id)}>Delete</button>
+              </StyledTableCell>
             </>
           )}
         </TableRow>
@@ -129,8 +131,8 @@ function AdminTable({ data }) {
                   >
                     <TableHead sx={{ fontWeight: "bold" }}>
                       <TableRow>
-                        <StyledTableCell align="right">ID</StyledTableCell>
-                        <StyledTableCell align="right">Name</StyledTableCell>
+                        <StyledTableCell align="left">ID</StyledTableCell>
+                        <StyledTableCell align="left">Name</StyledTableCell>
                         <StyledTableCell align="right">Colour</StyledTableCell>
                         <StyledTableCell align="right">memory</StyledTableCell>
                         <StyledTableCell align="right">
@@ -144,10 +146,10 @@ function AdminTable({ data }) {
                         .filter((item) => item.order_id === row.id)
                         .map((item) => (
                           <TableRow key={item.id}>
-                            <StyledTableCell align="right">
+                            <StyledTableCell align="left">
                               {item.product_id}
                             </StyledTableCell>
-                            <StyledTableCell align="right">
+                            <StyledTableCell align="left">
                               {item.product_name}
                             </StyledTableCell>
                             <StyledTableCell align="right">
@@ -161,11 +163,6 @@ function AdminTable({ data }) {
                             </StyledTableCell>
                             <StyledTableCell align="right">
                               £{item.price}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
-                              <button onClick={() => handleDelete(row.id)}>
-                                Delete
-                              </button>
                             </StyledTableCell>
                           </TableRow>
                         ))}
@@ -225,48 +222,58 @@ function AdminTable({ data }) {
 
   function CollapsibleTable({ data }) {
     return (
-      <TableContainer component={Paper}>
-        <Table aria-label="collapsible table">
-          <TableHead sx={{ fontWeight: "200" }}>
-            <TableRow>
-              <StyledTableCell />
-              <StyledTableCell component="th" scope="row">
-                ID
-              </StyledTableCell>
-              {data === "orders" && (
-                <>
-                  <StyledTableCell align="right">Name</StyledTableCell>
-                  <StyledTableCell align="right">Date</StyledTableCell>
-                  <StyledTableCell align="right">Total</StyledTableCell>
-                </>
-              )}
-              {data === "repairs" && (
-                <>
-                  <StyledTableCell align="right">Name</StyledTableCell>
-                  <StyledTableCell align="right">Email</StyledTableCell>
-                  <StyledTableCell align="right">Date</StyledTableCell>
-                </>
-              )}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data === "orders" && (
-              <>
-                {orders.map((order, index) => (
-                  <Row key={index} row={order} />
-                ))}
-              </>
-            )}
-            {data === "repairs" && (
-              <>
-                {repairs.map((repair, index) => (
-                  <Row key={index} row={repair} />
-                ))}
-              </>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <>
+        {(data === "orders" && orders.length > 0) ||
+        (data === "repairs" && repairs.length > 0) ? (
+          <>
+            <TableContainer component={Paper}>
+              <Table aria-label="collapsible table">
+                <TableHead sx={{ fontWeight: "200" }}>
+                  <TableRow>
+                    <StyledTableCell />
+                    <StyledTableCell component="th" scope="row">
+                      ID
+                    </StyledTableCell>
+                    {data === "orders" && (
+                      <>
+                        <StyledTableCell align="right">Name</StyledTableCell>
+                        <StyledTableCell align="right">Date</StyledTableCell>
+                        <StyledTableCell align="right">Total</StyledTableCell>
+                      </>
+                    )}
+                    {data === "repairs" && (
+                      <>
+                        <StyledTableCell align="right">Name</StyledTableCell>
+                        <StyledTableCell align="right">Email</StyledTableCell>
+                        <StyledTableCell align="right">Date</StyledTableCell>
+                        <StyledTableCell />
+                      </>
+                    )}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {data === "orders" && (
+                    <>
+                      {orders.map((order, index) => (
+                        <Row key={index} row={order} />
+                      ))}
+                    </>
+                  )}
+                  {data === "repairs" && (
+                    <>
+                      {repairs.map((repair, index) => (
+                        <Row key={index} row={repair} />
+                      ))}
+                    </>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </>
+        ) : (
+          <>No {data}</>
+        )}
+      </>
     );
   }
   return (

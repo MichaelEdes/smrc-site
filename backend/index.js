@@ -2,6 +2,7 @@ import express from "express";
 import mysql from "mysql";
 import cors from "cors";
 import url from "url";
+import bcrypt from "bcrypt";
 
 const app = express();
 app.use(cors());
@@ -151,6 +152,46 @@ app.post("/orders", (req, res) => {
     db.query(orderItemsQuery, [orderItemsValues], (err, data) => {
       if (err) return res.status(500).json(err);
       return res.json("Order submitted successfully");
+    });
+  });
+});
+
+app.post("/users", (req, res) => {
+  const { username, password } = req.body;
+
+  const q = "SELECT * FROM users WHERE username = ?;";
+  db.query(q, [username], (err, results) => {
+    if (err) return res.status(500).json(err);
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const user = results[0];
+
+    bcrypt.compare(password, user.password, (err, result) => {
+      if (err) return res.status(500).json(err);
+
+      if (!result) {
+        return res.status(401).json({ message: "Incorrect password" });
+      }
+
+      return res.json({ message: "Logged in successfully" });
+    });
+  });
+});
+
+app.post("/register", (req, res) => {
+  const { username, password } = req.body;
+
+  bcrypt.hash(password, 10, (err, hashedPassword) => {
+    if (err) return res.status(500).json(err);
+
+    const q = "INSERT INTO users (username, password) VALUES (?, ?);";
+    db.query(q, [username, hashedPassword], (err, results) => {
+      if (err) return res.status(500).json(err);
+
+      return res.json({ message: "User registered successfully" });
     });
   });
 });
