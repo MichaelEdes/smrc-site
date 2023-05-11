@@ -56,8 +56,8 @@ app.get("/orders", (req, res) => {
   });
 });
 
-app.get("/order_item", (req, res) => {
-  const q = "SELECT * FROM ORDER_ITEM;";
+app.get("/order_items", (req, res) => {
+  const q = "SELECT * FROM ORDER_ITEMS;";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);

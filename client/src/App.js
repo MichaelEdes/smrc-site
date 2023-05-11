@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import ProductPage from "./pages/ProductPage/ProductPage";
+import AdminPage from "./pages/AdminPage/AdminPage";
 import Header from "./components/Header/Header";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 
@@ -52,6 +53,7 @@ function App() {
             path="/ProductPage"
             element={<ProductPage addItemToCart={addItemToCart} />}
           />
+          <Route path="/AdminPage" element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
     </div>
