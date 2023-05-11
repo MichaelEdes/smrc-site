@@ -180,6 +180,7 @@ app.post("/users/login", (req, res) => {
       if (err) return res.status(500).json(err);
 
       if (!result) {
+        console.log("helluser", user, password, user.password);
         return res.status(401).json({ message: "Incorrect password" });
       }
 
