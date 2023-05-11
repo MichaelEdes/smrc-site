@@ -13,7 +13,7 @@ function ProductPage({ addItemToCart }) {
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
-        const res = axios.get("http://localhost:8800/products");
+        const res = axios.get("https://smrc.herokuapp.com/products");
         setProducts((await res).data);
       } catch (err) {
         console.log(err);
