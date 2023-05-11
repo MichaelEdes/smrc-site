@@ -9,7 +9,7 @@ function AdminLoginPage({ isLoggedIn, setIsLoggedIn }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (username === "admin" && password === "pass1") {
+    if (username === "admin" && password === "password") {
       setIsLoggedIn(true);
       navigate("/AdminPage");
     } else {

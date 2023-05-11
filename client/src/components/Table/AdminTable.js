@@ -32,6 +32,7 @@ function AdminTable({ data }) {
   const [repairs, setRepairs] = React.useState([]);
   const [orders, setOrders] = React.useState([]);
   const [orderItems, setOrderItems] = React.useState([]);
+  const [confirm, setConfirm] = React.useState(0);
 
   React.useEffect(() => {
     const fetchAllRepairs = async () => {
@@ -66,11 +67,19 @@ function AdminTable({ data }) {
   }, []);
 
   const handleDelete = async (id) => {
-    try {
-      await axios.delete(`https://smrc.herokuapp.com/device_repair/${id}`);
-      setRepairs(repairs.filter((repair) => repair.id !== id));
-    } catch (err) {
-      console.log(err);
+    if (confirm < 1) {
+      alert(
+        "Are you sure you want to delte this repair? click 'confirm' again to confirm completion"
+      );
+      setConfirm(confirm + 1);
+    } else {
+      try {
+        await axios.delete(`https://smrc.herokuapp.com/device_repair/${id}`);
+        setRepairs(repairs.filter((repair) => repair.id !== id));
+        setConfirm(0);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
@@ -111,7 +120,9 @@ function AdminTable({ data }) {
                 {new Date(row.date).toLocaleDateString()}
               </StyledTableCell>
               <StyledTableCell align="right">
-                <button onClick={() => handleDelete(row.id)}>Delete</button>
+                <button onClick={() => handleDelete(row.id)}>
+                  {confirm < 1 ? "Completed" : "Confirm"}
+                </button>
               </StyledTableCell>
             </>
           )}
