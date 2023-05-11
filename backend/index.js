@@ -20,6 +20,8 @@ if (process.env.JAWSDB_URL) {
     password: auth[1],
     database: dbUrl.pathname.substr(1),
   });
+
+  console.log("connected");
 } else {
   // Local development
   db = mysql.createConnection({
