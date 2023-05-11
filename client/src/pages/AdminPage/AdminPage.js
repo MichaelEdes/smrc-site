@@ -4,8 +4,6 @@ import "./AdminPage.css";
 import AdminTable from "../../components/Table/AdminTable";
 
 function AdminPage({ isLoggedIn, setIsLoggedIn }) {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
