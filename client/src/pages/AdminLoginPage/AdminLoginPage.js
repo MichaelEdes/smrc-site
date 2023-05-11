@@ -10,8 +10,8 @@ function AdminLoginPage() {
     e.preventDefault();
 
     const user = {
-      username: "admin",
-      password: "pass",
+      username: username,
+      password: password,
     };
 
     axios
