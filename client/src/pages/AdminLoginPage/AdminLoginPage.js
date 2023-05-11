@@ -48,7 +48,13 @@ function AdminLoginPage({ isLoggedIn, setIsLoggedIn }) {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit">Log In</button>
+          <button
+            type="submit"
+            className={username && password && "submit-btn"}
+            disabled={!username || !password}
+          >
+            Log In
+          </button>
         </form>
       </div>
     </div>

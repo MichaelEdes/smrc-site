@@ -55,8 +55,11 @@
 }
 
 .login-form button:hover {
+  transform: scale(1.1);
+}
+
+.submit-btn {
   background-color: blue;
   color: white;
-  transform: scale(1.1);
   transition: 0.5s;
 }
