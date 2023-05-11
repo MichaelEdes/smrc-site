@@ -22,6 +22,7 @@
 .header .logo {
   font-weight: 600;
   font-size: x-large;
+  z-index: 10000;
 }
 
 .logo span {
@@ -88,4 +89,26 @@
   font-size: 0.8rem;
   right: -5px;
   top: -8px;
+}
+
+.admin-button {
+  position: absolute;
+  right: 50px;
+  top: -1vh;
+  padding: 10px;
+  border: none;
+  background: blue;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+  width: max-content;
+}
+
+.admin-button a {
+  color: white;
+}
+
+.admin-button:hover {
+  transform: scale(1.15);
+  transition: 0.5s;
 }

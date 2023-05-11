@@ -1,28 +1,29 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./AdminLoginPage.css";
 
-function AdminLoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+function AdminLoginPage({ isLoggedIn, setIsLoggedIn }) {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const user = {
-      username: username,
-      password: password,
-    };
-
-    axios
-      .post("https://smrc.herokuapp.com/users/login", user)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (username === "admin" && password === "pass1") {
+      setIsLoggedIn(true);
+      navigate("/AdminPage");
+    } else {
+      alert("Invalid username or password!");
+    }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/AdminPage");
+    } else {
+      navigate("/AdminLoginPage");
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <div className="login-page">
@@ -47,7 +48,7 @@ function AdminLoginPage() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit">Log In</button>
         </form>
       </div>
     </div>

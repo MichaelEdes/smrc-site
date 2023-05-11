@@ -2,7 +2,7 @@ import React from "react";
 import "./Header.css";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-function Header({ toggleCart, cart }) {
+function Header({ toggleCart, cart, isLoggedIn }) {
   const handleCartClick = () => {
     toggleCart();
   };
@@ -19,11 +19,13 @@ function Header({ toggleCart, cart }) {
           <a href="/ProductPage">All Products</a>
         </div>
         <div className="cart-icon-container">
-          <div>
-            <button>
-              <a href="/AdminLoginPage">Admin</a>
+          {!isLoggedIn && (
+            <button className="admin-button">
+              <a href={isLoggedIn ? "/AdminPage" : "AdminLoginPage"}>
+                Admin Hub
+              </a>
             </button>
-          </div>
+          )}
           <div className="cart-icon" onClick={handleCartClick}>
             {cart.length > 0 && (
               <div className="cart-item-count">{cart.length}</div>

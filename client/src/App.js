@@ -9,14 +9,20 @@ import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 
 function App() {
   const [isActive, setIsActive] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
   useEffect(() => {
+    localStorage.removeItem("isLoggedIn");
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+    localStorage.setItem("isLoggedIn", String(isLoggedIn));
+  }, [cart, isLoggedIn]);
 
   const toggleCart = () => {
     setIsActive(!isActive);
@@ -34,6 +40,8 @@ function App() {
     setCart([]);
   };
 
+  console.log(isLoggedIn);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -44,7 +52,7 @@ function App() {
           removeItemFromCart={removeItemFromCart}
           emptyCart={emptyCart}
         />
-        <Header toggleCart={toggleCart} cart={cart} />
+        <Header toggleCart={toggleCart} cart={cart} isLoggedIn={isLoggedIn} />
         <Routes>
           <Route
             path="/"
@@ -54,8 +62,20 @@ function App() {
             path="/ProductPage"
             element={<ProductPage addItemToCart={addItemToCart} />}
           />
-          <Route path="/AdminPage" element={<AdminPage />} />
-          <Route path="/AdminLoginPage" element={<AdminLoginPage />} />
+          <Route
+            path="/AdminPage"
+            element={
+              isLoggedIn ? (
+                <AdminPage />
+              ) : (
+                <AdminLoginPage setIsLoggedIn={setIsLoggedIn} />
+              )
+            }
+          />
+          <Route
+            path="/AdminLoginPage"
+            element={<AdminLoginPage setIsLoggedIn={setIsLoggedIn} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

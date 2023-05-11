@@ -1,8 +1,19 @@
-import * as React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./AdminPage.css";
 import AdminTable from "../../components/Table/AdminTable";
 
-function AdminPage() {
+function AdminPage({ isLoggedIn, setIsLoggedIn }) {
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/AdminLoginPage");
+    }
+  }, [isLoggedIn, navigate]);
+
   return (
     <div className="admin-container">
       <h1>Orders</h1>
