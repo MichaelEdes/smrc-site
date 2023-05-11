@@ -32,7 +32,7 @@ if (process.env.JAWSDB_URL) {
   });
 }
 
-app.get("/products", (req, res) => {
+app.get("https://smrc.herokuapp.com/products", (req, res) => {
   const q = "SELECT * FROM products";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -40,7 +40,7 @@ app.get("/products", (req, res) => {
   });
 });
 
-app.get("/device_repair", (req, res) => {
+app.get("https://smrc.herokuapp.com//device_repair", (req, res) => {
   const q = "SELECT * FROM DEVICE_REPAIR;";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -48,7 +48,7 @@ app.get("/device_repair", (req, res) => {
   });
 });
 
-app.post("/device_repair", (req, res) => {
+app.post("https://smrc.herokuapp.com/device_repair", (req, res) => {
   const {
     first_name,
     surname,
