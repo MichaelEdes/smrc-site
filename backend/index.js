@@ -74,7 +74,7 @@ app.get("/order_items", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-  const q = "SELECT * USERS;";
+  const q = "SELECT * FROM users";
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.json(data);
@@ -164,9 +164,8 @@ app.post("/orders", (req, res) => {
   });
 });
 
-app.post("/users", (req, res) => {
+app.post("/users/login", (req, res) => {
   const { username, password } = req.body;
-
   const q = "SELECT * FROM users WHERE username = ?;";
   db.query(q, [username], (err, results) => {
     if (err) return res.status(500).json(err);
