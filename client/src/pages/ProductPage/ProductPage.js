@@ -31,12 +31,14 @@ function ProductPage({ addItemToCart }) {
     }
   };
 
-  const displayedProducts = products?.filter(
-    (product) =>
-      (selectedFilters.length === 0 ||
-        selectedFilters.includes(product.type)) &&
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const displayedProducts = Array.isArray(products)
+    ? products.filter(
+        (product) =>
+          (selectedFilters.length === 0 ||
+            selectedFilters.includes(product.type)) &&
+          product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
 
   return (
     <div className="product-page-container">

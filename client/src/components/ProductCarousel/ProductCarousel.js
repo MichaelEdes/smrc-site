@@ -24,21 +24,24 @@ const ProductCarousel = ({ addItemToCart }) => {
         <h1 id="product-carousel-title">Popular Items</h1>
         <div className="product-carousel-container">
           <div className="product-carousel">
-            {products?.slice(0, 7).map((product, index) => (
-              <ProductCard
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                type={product.type}
-                description={product.description}
-                image_url={product.image_url}
-                color={product.color}
-                memory={product.memory}
-                feature={product.feature}
-                price={product.price}
-                addItemToCart={addItemToCart}
-              />
-            ))}
+            {Array.isArray(products) &&
+              products
+                .slice(0, 7)
+                .map((product, index) => (
+                  <ProductCard
+                    key={product.id}
+                    id={product.id}
+                    name={product.name}
+                    type={product.type}
+                    description={product.description}
+                    image_url={product.image_url}
+                    color={product.color}
+                    memory={product.memory}
+                    feature={product.feature}
+                    price={product.price}
+                    addItemToCart={addItemToCart}
+                  />
+                ))}
           </div>
         </div>
       </div>
