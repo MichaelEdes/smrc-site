@@ -1,17 +1,34 @@
 import express from "express";
 import mysql from "mysql";
 import cors from "cors";
+import url from "url";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "smrc_schema",
-});
+let db;
+
+if (process.env.JAWSDB_URL) {
+  // Heroku deployment
+  const dbUrl = url.parse(process.env.JAWSDB_URL);
+  const auth = dbUrl.auth.split(":");
+
+  db = mysql.createConnection({
+    host: dbUrl.hostname,
+    user: auth[0],
+    password: "",
+    database: dbUrl.pathname.substr(1),
+  });
+} else {
+  // Local development
+  db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "smrc_schema",
+  });
+}
 
 app.get("/products", (req, res) => {
   const q = "SELECT * FROM products";
