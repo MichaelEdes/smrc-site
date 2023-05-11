@@ -29,6 +29,15 @@ const RepairCentre = () => {
 
     try {
       await axios.post("http://localhost:8800/device_repair", report);
+      alert("Thank you for your report, we will be in touch shortly! 😁");
+      setFirstName("");
+      setSurName("");
+      setEmail("");
+      setDeviceType("");
+      setDeviceMake("");
+      setDeviceModel("");
+      setProblem("");
+      setOtherNotes("");
     } catch (err) {
       console.log(err);
     }
@@ -197,7 +206,7 @@ const RepairCentre = () => {
               onChange={(e) => setOtherNotes(e.target.value)}
             />
             <br />
-            <button type="submit">Submit</button>
+            <button id="form-submit-btn" type="submit">Submit</button>
           </form>
         </div>
         <div className="repair-centre-image">

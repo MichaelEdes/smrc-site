@@ -1,7 +1,6 @@
 .repair-centre-container {
   display: block;
   height: fit-content;
-  width: 100%;
   background-color: blue;
   padding: 5vw;
   width: 100vw;
@@ -18,7 +17,7 @@
 
 #form-title {
   padding: unset;
-  margin: 0 0 -10px 0;
+  margin: 0 0 -70px 0;
   font-size: 1.5rem;
 }
 
@@ -80,7 +79,8 @@
   width: 100%;
   padding: 0rem 1rem;
   box-sizing: border-box;
-  height: fit-content;
+  height: 100%;
+transform: scale(0.8);
 }
 
 .repair-centre-form h1 {
@@ -136,4 +136,8 @@
   border-radius: 20px;
   color: white;
   font-size: larger;
+}
+
+#form-submit-btn {
+  cursor: pointer;
 }
