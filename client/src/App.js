@@ -40,8 +40,6 @@ function App() {
     setCart([]);
   };
 
-  console.log(isLoggedIn);
-
   return (
     <div className="App">
       <BrowserRouter>
