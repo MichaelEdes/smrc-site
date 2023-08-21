@@ -18,7 +18,7 @@ function ShoppingCartItem({
 
   return (
     <div className="shopping-cart-item-container">
-      <div>
+      <div className="img-container">
         <img src={image_url} alt={name} />
       </div>
       <div className="cart-item-content">
@@ -28,8 +28,8 @@ function ShoppingCartItem({
           <sub>
             {memory}GB | {feature} | {color}
           </sub>
-          £{price}
         </div>
+        <h2>£{price}</h2>
       </div>
       <div className="cart-item-remove-btn">
         <div className="cart-remove-item" onClick={handleRemoveItem}>

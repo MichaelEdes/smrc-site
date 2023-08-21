@@ -22,7 +22,7 @@
 .header .logo {
   font-weight: 600;
   font-size: x-large;
-  z-index: 10000;
+  z-index: 1;
 }
 
 .logo span {
@@ -47,7 +47,20 @@
   position: relative;
 }
 
-.cart-icon {
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.button-container button {
+  background-color: rgb(234, 238, 238);
+  border: none;
+  border-radius: 2em;
+}
+
+.cart-icon,
+.admin-icon {
   display: block;
   height: 40px;
   width: 40px;
@@ -58,7 +71,6 @@
   border-radius: 50%;
   transition: transform 0.5s;
   cursor: pointer;
-  position: fixed;
   right: 30px;
   top: 30px;
   z-index: 9;
@@ -76,6 +88,20 @@
   }
 }
 
+.mobile-page-link {
+  display: none;
+}
+
+@media (max-width: 546px) {
+  .page-link {
+    display: none;
+  }
+
+  .mobile-page-link {
+    display: block;
+  }
+}
+
 .cart-item-count {
   position: absolute;
   background-color: blue;
@@ -89,31 +115,4 @@
   font-size: 0.8rem;
   right: -5px;
   top: -8px;
-}
-
-.admin-button {
-  display: block;
-  height: 40px;
-  width: max-content;
-  background-color: purple;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  transition: transform 0.5s;
-  cursor: pointer;
-  position: fixed;
-  right: 100px;
-  top: 30px;
-  z-index: 9;
-  border: none;
-}
-
-.admin-button a {
-  color: white;
-}
-
-.admin-button:hover {
-  transform: scale(1.15);
-  transition: 0.5s;
 }

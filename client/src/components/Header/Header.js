@@ -1,6 +1,7 @@
 import React from "react";
 import "./Header.css";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import PersonIcon from "@mui/icons-material/Person";
 
 function Header({ toggleCart, cart, isLoggedIn }) {
   const handleCartClick = () => {
@@ -19,18 +20,23 @@ function Header({ toggleCart, cart, isLoggedIn }) {
           <a href="/ProductPage">All Products</a>
         </div>
         <div className="cart-icon-container">
-          {!isLoggedIn && (
-            <button className="admin-button">
-              <a href={isLoggedIn ? "/AdminPage" : "AdminLoginPage"}>
-                Admin Hub
-              </a>
+          <div className="button-container">
+            <button className="mobile-page-link">
+              <a href={"/ProductPage"}>All Products</a>
             </button>
-          )}
-          <div className="cart-icon" onClick={handleCartClick}>
-            {cart.length > 0 && (
-              <div className="cart-item-count">{cart.length}</div>
+            {!isLoggedIn && (
+              <button className="admin-icon">
+                <a href={isLoggedIn ? "/AdminPage" : "AdminLoginPage"}>
+                  <PersonIcon />
+                </a>
+              </button>
             )}
-            <ShoppingCartOutlinedIcon />
+            <div className="cart-icon" onClick={handleCartClick}>
+              {cart.length > 0 && (
+                <div className="cart-item-count">{cart.length}</div>
+              )}
+              <ShoppingCartOutlinedIcon />
+            </div>
           </div>
         </div>
       </div>

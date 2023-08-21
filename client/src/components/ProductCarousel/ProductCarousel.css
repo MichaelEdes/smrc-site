@@ -18,6 +18,7 @@
   margin: unset;
   padding: 3vw 5vw 0 5vw;
   color: black;
+  font-size: clamp(1em, 2em, 6em);
 }
 
 .product-carousel {

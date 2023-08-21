@@ -206,10 +206,10 @@ const RepairCentre = () => {
               onChange={(e) => setOtherNotes(e.target.value)}
             />
             <br />
-            <button id="form-submit-btn" type="submit">
-              Submit
-            </button>
           </form>
+          <button id="form-submit-btn" type="submit">
+            Submit
+          </button>
         </div>
         <div className="repair-centre-image">
           <img

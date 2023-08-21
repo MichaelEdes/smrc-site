@@ -4,7 +4,6 @@
   height: 100vh;
   background-color: white;
   width: 100%;
-  padding: 2vh 1vw;
   z-index: 10;
   align-items: flex-start;
   justify-content: flex-start;
@@ -94,6 +93,7 @@
   gap: 20px;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
   overflow: scroll;
+  padding: 1em;
 }
 
 .cart-checkout {
